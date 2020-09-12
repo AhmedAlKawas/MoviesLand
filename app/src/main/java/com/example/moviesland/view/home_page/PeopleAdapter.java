@@ -1,6 +1,7 @@
 package com.example.moviesland.view.home_page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,6 +13,7 @@ import com.example.moviesland.R;
 import com.example.moviesland.databinding.ItemPersonBinding;
 import com.example.moviesland.interfaces.OnLastItemReached;
 import com.example.moviesland.model.Person;
+import com.example.moviesland.view.person_details.PersonDetailsActivity;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PersonHold
     private Context context;
     private OnLastItemReached onLastItemReached;
 
-    public PeopleAdapter(List<Person> peopleList, OnLastItemReached onLastItemReached) {
+    PeopleAdapter(List<Person> peopleList, OnLastItemReached onLastItemReached) {
         this.peopleList = peopleList;
         this.onLastItemReached = onLastItemReached;
     }
@@ -42,9 +44,20 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PersonHold
     public void onBindViewHolder(@NonNull PersonHolder holder, int position) {
         holder.personBinding.setPerson(peopleList.get(position));
 
-        if (position == peopleList.size() - 1){
+        if (position == peopleList.size() - 1) {
             onLastItemReached.OnLastItemReached();
         }
+
+        holder.personBinding.cvPersonItem.setOnClickListener(view ->
+                goToPersonDetails(peopleList.get(position)));
+
+    }
+
+    private void goToPersonDetails(Person person) {
+
+        Intent i = new Intent(context, PersonDetailsActivity.class);
+        i.putExtra(context.getResources().getString(R.string.person), person);
+        context.startActivity(i);
 
     }
 

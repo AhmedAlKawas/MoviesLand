@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviesland.R;
 import com.example.moviesland.databinding.ItemPersonBinding;
+import com.example.moviesland.interfaces.OnLastItemReached;
 import com.example.moviesland.model.Person;
 
 import java.util.List;
@@ -19,9 +20,11 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PersonHold
     private List<Person> peopleList;
     private LayoutInflater layoutInflater;
     private Context context;
+    private OnLastItemReached onLastItemReached;
 
-    public PeopleAdapter(List<Person> peopleList) {
+    public PeopleAdapter(List<Person> peopleList, OnLastItemReached onLastItemReached) {
         this.peopleList = peopleList;
+        this.onLastItemReached = onLastItemReached;
     }
 
     @NonNull
@@ -38,6 +41,11 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PersonHold
     @Override
     public void onBindViewHolder(@NonNull PersonHolder holder, int position) {
         holder.personBinding.setPerson(peopleList.get(position));
+
+        if (position == peopleList.size()){
+            onLastItemReached.OnLastItemReached();
+        }
+
     }
 
     @Override

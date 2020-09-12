@@ -29,7 +29,9 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initView() {
         RecyclerView peopleRv = findViewById(R.id.rv_people_list);
-        PeopleAdapter peopleAdapter = new PeopleAdapter(personsList);
+        PeopleAdapter peopleAdapter = new PeopleAdapter(personsList, () -> {
+
+        });
         peopleRv.setAdapter(peopleAdapter);
     }
 

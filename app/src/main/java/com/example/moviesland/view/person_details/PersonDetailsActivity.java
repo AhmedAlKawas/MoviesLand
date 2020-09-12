@@ -13,9 +13,9 @@ import com.example.moviesland.view_model.PeopleViewModel;
 
 public class PersonDetailsActivity extends AppCompatActivity {
 
-    ActivityPersonDetailsBinding personDetailsBinding;
-    Person person;
-    PeopleViewModel peopleViewModel;
+    private ActivityPersonDetailsBinding personDetailsBinding;
+    private Person person;
+    private PeopleViewModel peopleViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,10 @@ public class PersonDetailsActivity extends AppCompatActivity {
                 .get(PeopleViewModel.class);
 
         peopleViewModel.returnPersonImages().observe(PersonDetailsActivity.this, strings -> {
-
+            if (strings != null){
+                PersonImagesAdapter imagesAdapter = new PersonImagesAdapter(strings);
+                personDetailsBinding.rvPersonImages.setAdapter(imagesAdapter);
+            }
         });
 
     }

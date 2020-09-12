@@ -1,5 +1,6 @@
 package com.example.moviesland.repository;
 
+import com.example.moviesland.network.model.GetPersonImagesResponse;
 import com.example.moviesland.network.model.GetPopularPeopleResponse;
 import com.example.moviesland.network.services.PopularPeopleService;
 
@@ -64,6 +65,37 @@ public class PeopleRepository {
 
                         }
                     });
+
+        });
+
+    }
+
+    public Observable<GetPersonImagesResponse> getPersonImagesRepo(int personId) {
+
+        return Observable.create(emitter -> {
+
+            peopleService.getPersonImages(personId).subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io()).subscribe(new Observer<GetPersonImagesResponse>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(GetPersonImagesResponse response) {
+                    emitter.onNext(response);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    emitter.onError(e);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
 
         });
 

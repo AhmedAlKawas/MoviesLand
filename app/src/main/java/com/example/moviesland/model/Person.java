@@ -1,5 +1,13 @@
 package com.example.moviesland.model;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.moviesland.R;
+
 import java.io.Serializable;
 
 public class Person implements Serializable {
@@ -57,5 +65,16 @@ public class Person implements Serializable {
 
     public void setPopularity(Float popularity) {
         this.popularity = popularity;
+    }
+
+    @BindingAdapter("loadImage")
+    public static void loadImageByGlide(ImageView imageView, String imgUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.ic_user)
+                .error(R.drawable.ic_user)
+                .fitCenter();
+
+        Glide.with(imageView.getContext()).setDefaultRequestOptions(requestOptions)
+                .load(R.string.image_base_url + imgUrl).into(imageView);
     }
 }

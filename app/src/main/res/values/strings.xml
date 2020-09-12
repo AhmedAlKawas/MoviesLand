@@ -3,4 +3,5 @@
     <string name="people">people</string>
     <string name="person_image">Person image</string>
     <string name="shadow">Shadow</string>
+    <string name="image_base_url">https://image.tmdb.org/t/p/w500</string>
 </resources>

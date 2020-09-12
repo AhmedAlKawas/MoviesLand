@@ -5,4 +5,6 @@
     <string name="shadow">Shadow</string>
     <string name="image_base_url">https://image.tmdb.org/t/p/w500</string>
     <string name="person">person</string>
+    <string name="known_for_department">Known for department : </string>
+    <string name="popularity">Popularity : </string>
 </resources>

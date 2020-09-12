@@ -1,9 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".view.person_details.PersonDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/appbar_background"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_app_bar"
+            app:layout_constraintStart_toStartOf="@id/view_app_bar"
+            app:layout_constraintTop_toTopOf="@id/view_app_bar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@{person.name}"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintBottom_toBottomOf="@id/view_app_bar"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="@id/view_app_bar" />
+
+        <TextView
+            android:id="@+id/tv_known_for"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="@string/known_for_department"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_app_bar" />
+
+        <TextView
+            android:id="@+id/tv_known_for_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{person.knownForDepartment}"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
+            android:layout_marginStart="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_known_for"
+            app:layout_constraintStart_toEndOf="@id/tv_known_for"
+            app:layout_constraintTop_toTopOf="@id/tv_known_for" />
+
+        <TextView
+            android:id="@+id/tv_popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/popularity"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="@id/tv_known_for"
+            app:layout_constraintTop_toBottomOf="@id/tv_known_for" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{person.popularity.toString()}"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_popularity"
+            app:layout_constraintStart_toStartOf="@id/tv_known_for_value"
+            app:layout_constraintTop_toTopOf="@id/tv_popularity" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_person_images"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_popularity" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="person"
+            type="com.example.moviesland.model.Person" />
+    </data>
+
+</layout>

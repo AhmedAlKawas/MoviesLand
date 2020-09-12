@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="@id/view_app_bar"
         android:textColor="@color/textColor"
         android:text="@string/app_name"
-        android:textSize="@dimen/_16ssp"/>
+        android:textSize="@dimen/_18ssp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_people_list"

@@ -19,7 +19,7 @@ public class PeopleViewModel extends ViewModel {
 
     private MutableLiveData<List<Person>> personsLiveData = new MutableLiveData<>();
 
-    public MutableLiveData<List<Person>> getPersons() {
+    public MutableLiveData<List<Person>> returnPersons() {
         return personsLiveData;
     }
 

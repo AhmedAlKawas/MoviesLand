@@ -46,7 +46,7 @@ public class GetPersonImagesResponse {
         private Integer voteCount;
         @SerializedName("vote_average")
         @Expose
-        private Integer voteAverage;
+        private Float voteAverage;
         @SerializedName("file_path")
         @Expose
         private String filePath;
@@ -86,11 +86,11 @@ public class GetPersonImagesResponse {
             this.voteCount = voteCount;
         }
 
-        public Integer getVoteAverage() {
+        public Float getVoteAverage() {
             return voteAverage;
         }
 
-        public void setVoteAverage(Integer voteAverage) {
+        public void setVoteAverage(Float voteAverage) {
             this.voteAverage = voteAverage;
         }
 

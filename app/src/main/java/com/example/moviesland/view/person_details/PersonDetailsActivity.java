@@ -4,15 +4,18 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moviesland.R;
 import com.example.moviesland.databinding.ActivityPersonDetailsBinding;
 import com.example.moviesland.model.Person;
+import com.example.moviesland.view_model.PeopleViewModel;
 
 public class PersonDetailsActivity extends AppCompatActivity {
 
     ActivityPersonDetailsBinding personDetailsBinding;
     Person person;
+    PeopleViewModel peopleViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +28,22 @@ public class PersonDetailsActivity extends AppCompatActivity {
     }
 
     private void getIntentExtras() {
-        if (getIntent().getSerializableExtra(getString(R.string.person)) != null){
+        if (getIntent().getSerializableExtra(getString(R.string.person)) != null) {
             person = (Person) getIntent().getSerializableExtra(getString(R.string.person));
             personDetailsBinding.setPerson(person);
+            initListeners();
+            peopleViewModel.getPersonImages(person.getPersonId());
         }
+    }
+
+    private void initListeners() {
+
+        peopleViewModel = new ViewModelProvider(PersonDetailsActivity.this)
+                .get(PeopleViewModel.class);
+
+        peopleViewModel.returnPersonImages().observe(PersonDetailsActivity.this, strings -> {
+
+        });
+
     }
 }

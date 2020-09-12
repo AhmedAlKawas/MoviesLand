@@ -19,6 +19,18 @@ public class Person implements Serializable {
     private String knownForDepartment;
     private Float popularity;
 
+    @BindingAdapter("loadImage")
+    public static void loadImageByGlide(ImageView imageView, String imgUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.ic_user)
+                .error(R.drawable.ic_user)
+                .centerCrop();
+
+        Glide.with(imageView.getContext()).setDefaultRequestOptions(requestOptions)
+                .load(imageView.getContext().getString(R.string.image_base_url) + imgUrl)
+                .into(imageView);
+    }
+
     public Integer getPersonId() {
         return personId;
     }
@@ -65,16 +77,5 @@ public class Person implements Serializable {
 
     public void setPopularity(Float popularity) {
         this.popularity = popularity;
-    }
-
-    @BindingAdapter("loadImage")
-    public static void loadImageByGlide(ImageView imageView, String imgUrl) {
-        RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.ic_user)
-                .error(R.drawable.ic_user)
-                .fitCenter();
-
-        Glide.with(imageView.getContext()).setDefaultRequestOptions(requestOptions)
-                .load(R.string.image_base_url + imgUrl).into(imageView);
     }
 }

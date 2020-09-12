@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
+import com.example.moviesland.view.adapters.PeopleAdapter;
 
 import java.util.List;
 
@@ -21,7 +23,14 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         getIntentExtras();
+        initView();
 
+    }
+
+    private void initView() {
+        RecyclerView peopleRv = findViewById(R.id.rv_people_list);
+        PeopleAdapter peopleAdapter = new PeopleAdapter(personsList);
+        peopleRv.setAdapter(peopleAdapter);
     }
 
     @SuppressWarnings("unchecked")

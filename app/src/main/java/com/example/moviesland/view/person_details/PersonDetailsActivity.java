@@ -25,6 +25,8 @@ public class PersonDetailsActivity extends AppCompatActivity {
 
         getIntentExtras();
 
+        personDetailsBinding.btnBack.setOnClickListener(view -> super.onBackPressed());
+
     }
 
     private void getIntentExtras() {

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.moviesland.model.Person;
+import com.example.moviesland.network.model.GetPersonImagesResponse;
 import com.example.moviesland.network.model.GetPopularPeopleResponse;
 import com.example.moviesland.repository.PeopleRepository;
 
@@ -21,6 +22,12 @@ public class PeopleViewModel extends ViewModel {
 
     public MutableLiveData<List<Person>> returnPersons() {
         return personsLiveData;
+    }
+
+    private MutableLiveData<List<String>> personImagesLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<List<String>> returnPersonImages() {
+        return personImagesLiveData;
     }
 
     public void getPopularPeople(int page) {
@@ -70,6 +77,45 @@ public class PeopleViewModel extends ViewModel {
         }
 
         personsLiveData.postValue(personsList);
+
+    }
+
+    public void getPersonImages(int personId) {
+
+        peopleRepository.getPersonImagesRepo(personId).subscribe(new Observer<GetPersonImagesResponse>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(GetPersonImagesResponse response) {
+                if (response != null) {
+
+                    List<String> personImages = new ArrayList<>();
+
+                    for (GetPersonImagesResponse.Profile profile : response.getProfiles()) {
+
+                        personImages.add(profile.getFilePath());
+
+                    }
+
+                    personImagesLiveData.postValue(personImages);
+
+                } else
+                    personImagesLiveData.postValue(null);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                personImagesLiveData.postValue(null);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
 
     }
 

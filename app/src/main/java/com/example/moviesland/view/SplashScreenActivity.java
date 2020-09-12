@@ -24,7 +24,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         initListeners();
 
-        peopleViewModel.getPopularPeople();
+        peopleViewModel.getPopularPeople(1);
 
     }
 

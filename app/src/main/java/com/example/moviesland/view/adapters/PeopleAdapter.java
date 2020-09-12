@@ -42,7 +42,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PersonHold
     public void onBindViewHolder(@NonNull PersonHolder holder, int position) {
         holder.personBinding.setPerson(peopleList.get(position));
 
-        if (position == peopleList.size()){
+        if (position == peopleList.size() - 1){
             onLastItemReached.OnLastItemReached();
         }
 

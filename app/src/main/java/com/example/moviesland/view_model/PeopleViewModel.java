@@ -23,9 +23,9 @@ public class PeopleViewModel extends ViewModel {
         return personsLiveData;
     }
 
-    public void getPopularPeople() {
+    public void getPopularPeople(int page) {
 
-        peopleRepository.getPopularPeopleRepo().subscribe(new Observer<GetPopularPeopleResponse>() {
+        peopleRepository.getPopularPeopleRepo(page).subscribe(new Observer<GetPopularPeopleResponse>() {
             @Override
             public void onSubscribe(Disposable d) {
 

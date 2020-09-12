@@ -2,11 +2,13 @@ package com.example.moviesland.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
 import com.example.moviesland.view.adapters.PeopleAdapter;
@@ -15,7 +17,9 @@ import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    List<Person> personsList;
+    private List<Person> personsList;
+    private LottieAnimationView animationView;
+    private PeopleAdapter peopleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +33,16 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initView() {
         RecyclerView peopleRv = findViewById(R.id.rv_people_list);
-        PeopleAdapter peopleAdapter = new PeopleAdapter(personsList, () -> {
-
+        animationView = findViewById(R.id.lottie);
+        peopleAdapter = new PeopleAdapter(personsList, () -> {
+            animationView.setVisibility(View.VISIBLE);
         });
         peopleRv.setAdapter(peopleAdapter);
     }
 
     @SuppressWarnings("unchecked")
     private void getIntentExtras() {
-        if (getIntent().getSerializableExtra(getResources().getString(R.string.people)) != null){
+        if (getIntent().getSerializableExtra(getResources().getString(R.string.people)) != null) {
             personsList = (List<Person>) getIntent().getSerializableExtra(getResources()
                     .getString(R.string.people));
         }

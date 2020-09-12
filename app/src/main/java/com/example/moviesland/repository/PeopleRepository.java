@@ -38,11 +38,11 @@ public class PeopleRepository {
         static PeopleRepository peopleRepository = new PeopleRepository();
     }
 
-    public Observable<GetPopularPeopleResponse> getPopularPeopleRepo() {
+    public Observable<GetPopularPeopleResponse> getPopularPeopleRepo(int page) {
 
         return Observable.create(emitter -> {
 
-            peopleService.getPopularPeople().observeOn(Schedulers.io()).subscribeOn(Schedulers.io())
+            peopleService.getPopularPeople(page).observeOn(Schedulers.io()).subscribeOn(Schedulers.io())
                     .subscribe(new Observer<GetPopularPeopleResponse>() {
                         @Override
                         public void onSubscribe(Disposable d) {

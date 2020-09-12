@@ -1,4 +1,4 @@
-package com.example.moviesland.view;
+package com.example.moviesland.view.home_page;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
-import com.example.moviesland.view.adapters.PeopleAdapter;
 import com.example.moviesland.view_model.PeopleViewModel;
 
 import java.util.List;

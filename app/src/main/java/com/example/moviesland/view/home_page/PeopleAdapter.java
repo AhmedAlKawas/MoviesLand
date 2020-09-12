@@ -1,4 +1,4 @@
-package com.example.moviesland.view.adapters;
+package com.example.moviesland.view.home_page;
 
 import android.content.Context;
 import android.view.LayoutInflater;

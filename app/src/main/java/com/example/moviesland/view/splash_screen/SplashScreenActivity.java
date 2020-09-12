@@ -1,4 +1,4 @@
-package com.example.moviesland.view;
+package com.example.moviesland.view.splash_screen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
+import com.example.moviesland.view.home_page.HomePageActivity;
 import com.example.moviesland.view_model.PeopleViewModel;
 
 import java.io.Serializable;

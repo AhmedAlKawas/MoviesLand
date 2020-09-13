@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.moviesland.R;
 import com.example.moviesland.databinding.ActivityImageViewBinding;
-import com.example.moviesland.model.Person;
 
 public class ImageViewActivity extends AppCompatActivity {
 
@@ -31,4 +30,5 @@ public class ImageViewActivity extends AppCompatActivity {
         }
 
     }
+
 }

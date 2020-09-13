@@ -20,6 +20,8 @@ public class ImageViewActivity extends AppCompatActivity {
 
         getIntentExtras();
 
+        imageViewBinding.btnBack.setOnClickListener(view -> super.onBackPressed());
+
     }
 
     private void getIntentExtras() {

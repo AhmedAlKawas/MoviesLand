@@ -16,7 +16,11 @@ import io.reactivex.disposables.Disposable;
 
 public class PeopleViewModel extends ViewModel {
 
-    private PeopleRepository peopleRepository = PeopleRepository.getInstance();
+    private PeopleRepository peopleRepository;
+
+    public PeopleViewModel(PeopleRepository peopleRepository) {
+        this.peopleRepository = peopleRepository;
+    }
 
     private MutableLiveData<List<Person>> personsLiveData = new MutableLiveData<>();
 

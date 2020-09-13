@@ -8,13 +8,19 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
+import com.example.moviesland.utils.BaseApplication;
 import com.example.moviesland.view.home_page.HomePageActivity;
 import com.example.moviesland.view_model.PeopleViewModel;
 
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class SplashScreenActivity extends AppCompatActivity {
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     private PeopleViewModel peopleViewModel;
 
@@ -22,6 +28,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        ((BaseApplication) getApplication()).getApplicationComponent().inject(this);
 
         initListeners();
 

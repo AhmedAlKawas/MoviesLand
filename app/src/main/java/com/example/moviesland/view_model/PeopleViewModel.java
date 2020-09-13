@@ -11,6 +11,8 @@ import com.example.moviesland.repository.PeopleRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -18,6 +20,7 @@ public class PeopleViewModel extends ViewModel {
 
     private PeopleRepository peopleRepository;
 
+    @Inject
     public PeopleViewModel(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }

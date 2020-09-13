@@ -4,6 +4,8 @@ import com.example.moviesland.network.model.GetPersonImagesResponse;
 import com.example.moviesland.network.model.GetPopularPeopleResponse;
 import com.example.moviesland.network.services.PopularPeopleService;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -13,6 +15,7 @@ public class PeopleRepository {
 
     private PopularPeopleService peopleService;
 
+    @Inject
     public PeopleRepository(PopularPeopleService peopleService) {
         this.peopleService = peopleService;
     }

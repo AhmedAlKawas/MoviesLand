@@ -1,6 +1,7 @@
 package com.example.moviesland.view.person_details;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviesland.R;
 import com.example.moviesland.databinding.ItemPersonImageBinding;
+import com.example.moviesland.view.image_view.ImageViewActivity;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class PersonImagesAdapter extends RecyclerView.Adapter<PersonImagesAdapte
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public PersonImagesAdapter(List<String> imagePathsList) {
+    PersonImagesAdapter(List<String> imagePathsList) {
         this.imagePathsList = imagePathsList;
     }
 
@@ -37,6 +39,15 @@ public class PersonImagesAdapter extends RecyclerView.Adapter<PersonImagesAdapte
     @Override
     public void onBindViewHolder(@NonNull ImageHolder holder, int position) {
         holder.binding.setImagePath(imagePathsList.get(position));
+
+        holder.binding.cvPersonItem.setOnClickListener(view ->
+                goToImageView(imagePathsList.get(position)));
+    }
+
+    private void goToImageView(String imagePath) {
+        Intent intent = new Intent(context, ImageViewActivity.class);
+        intent.putExtra(context.getResources().getString(R.string.image_path), imagePath);
+        context.startActivity(intent);
     }
 
     @Override

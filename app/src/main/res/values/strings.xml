@@ -10,4 +10,8 @@
     <string name="image_path">imagePath</string>
     <string name="backbtn">backBtn</string>
     <string name="download_btn">download btn</string>
+    <string name="download_dir_path">/Movies land/downloads</string>
+    <string name="jpg">jpg</string>
+    <string name="image_downloaded">Image already downloaded</string>
+    <string name="image_downloaded_success">Image downloaded successfully</string>
 </resources>

@@ -11,14 +11,21 @@ import com.example.moviesland.databinding.ActivityPersonDetailsBinding;
 import com.example.moviesland.model.Person;
 import com.example.moviesland.view_model.PeopleViewModel;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class PersonDetailsActivity extends AppCompatActivity {
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
     private ActivityPersonDetailsBinding personDetailsBinding;
     private Person person;
     private PeopleViewModel peopleViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         personDetailsBinding = DataBindingUtil.setContentView(PersonDetailsActivity.this,
                 R.layout.activity_person_details);
@@ -40,11 +47,11 @@ public class PersonDetailsActivity extends AppCompatActivity {
 
     private void initListeners() {
 
-        peopleViewModel = new ViewModelProvider(PersonDetailsActivity.this)
+        peopleViewModel = new ViewModelProvider(PersonDetailsActivity.this, viewModelFactory)
                 .get(PeopleViewModel.class);
 
         peopleViewModel.returnPersonImages().observe(PersonDetailsActivity.this, strings -> {
-            if (strings != null){
+            if (strings != null) {
                 PersonImagesAdapter imagesAdapter = new PersonImagesAdapter(strings);
                 personDetailsBinding.rvPersonImages.setAdapter(imagesAdapter);
             }

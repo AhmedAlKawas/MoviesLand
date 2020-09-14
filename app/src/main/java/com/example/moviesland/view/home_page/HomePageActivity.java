@@ -48,8 +48,10 @@ public class HomePageActivity extends BaseActivity {
         viewModel.returnPersons().observe(HomePageActivity.this, response -> {
             animationView.setVisibility(View.GONE);
             if (response != null) {
-                personsList.addAll(response.getPersonList());
-                peopleAdapter.notifyDataSetChanged();
+                if (response.getCode() == 200) {
+                    personsList.addAll(response.getPersonList());
+                    peopleAdapter.notifyDataSetChanged();
+                }
             }
         });
 

@@ -1,4 +1,4 @@
-package com.example.moviesland.view_model;
+package com.example.moviesland.di;
 
 import androidx.lifecycle.ViewModel;
 

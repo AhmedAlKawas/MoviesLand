@@ -1,7 +1,7 @@
-package com.example.moviesland.component;
+package com.example.moviesland.di.component;
 
-import com.example.moviesland.module.ContextModule;
-import com.example.moviesland.module.NetworkModule;
+import com.example.moviesland.di.module.ContextModule;
+import com.example.moviesland.di.module.NetworkModule;
 import com.example.moviesland.view.splash_screen.SplashScreenActivity;
 
 import javax.inject.Singleton;

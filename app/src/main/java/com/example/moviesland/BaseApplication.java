@@ -1,9 +1,9 @@
-package com.example.moviesland.utils;
+package com.example.moviesland;
 
 import android.app.Application;
 
-import com.example.moviesland.component.ApplicationComponent;
-import com.example.moviesland.component.DaggerApplicationComponent;
+import com.example.moviesland.di.component.ApplicationComponent;
+import com.example.moviesland.di.component.DaggerApplicationComponent;
 
 public class BaseApplication extends Application {
 

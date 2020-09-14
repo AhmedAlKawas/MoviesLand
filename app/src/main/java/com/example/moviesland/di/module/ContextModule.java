@@ -1,4 +1,4 @@
-package com.example.moviesland.module;
+package com.example.moviesland.di.module;
 
 import android.app.Application;
 import android.content.Context;

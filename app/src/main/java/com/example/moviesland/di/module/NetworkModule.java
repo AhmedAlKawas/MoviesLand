@@ -1,4 +1,4 @@
-package com.example.moviesland.module;
+package com.example.moviesland.di.module;
 
 import com.example.moviesland.network.services.PopularPeopleService;
 

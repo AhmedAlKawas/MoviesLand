@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
-import com.example.moviesland.utils.BaseApplication;
+import com.example.moviesland.BaseApplication;
 import com.example.moviesland.view.home_page.HomePageActivity;
 import com.example.moviesland.view_model.PeopleViewModel;
 

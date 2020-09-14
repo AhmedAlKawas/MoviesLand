@@ -45,10 +45,10 @@ public class HomePageActivity extends BaseActivity {
 
         viewModel = new ViewModelProvider(this, viewModelFactory).get(PeopleViewModel.class);
 
-        viewModel.returnPersons().observe(HomePageActivity.this, people -> {
+        viewModel.returnPersons().observe(HomePageActivity.this, response -> {
             animationView.setVisibility(View.GONE);
-            if (people != null) {
-                personsList.addAll(people);
+            if (response != null) {
+                personsList.addAll(response.getPersonList());
                 peopleAdapter.notifyDataSetChanged();
             }
         });

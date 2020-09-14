@@ -16,7 +16,7 @@ public class PeopleRepository {
     private PopularPeopleService peopleService;
 
     @Inject
-    public PeopleRepository(PopularPeopleService peopleService) {
+    PeopleRepository(PopularPeopleService peopleService) {
         this.peopleService = peopleService;
     }
 

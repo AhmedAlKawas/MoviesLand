@@ -40,10 +40,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         peopleViewModel = new ViewModelProvider(this, viewModelFactory)
                 .get(PeopleViewModel.class);
 
-        peopleViewModel.returnPersons().observe(SplashScreenActivity.this, people -> {
+        peopleViewModel.returnPersons().observe(SplashScreenActivity.this, response -> {
 
-            if (people != null) {
-                goToHomePage(people);
+            if (response != null) {
+                goToHomePage(response.getPersonList());
             }
 
         });

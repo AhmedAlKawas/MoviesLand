@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.moviesland.model.Person;
+import com.example.moviesland.model.PopularPersonsResponse;
 import com.example.moviesland.network.model.GetPersonImagesResponse;
 import com.example.moviesland.network.model.GetPopularPeopleResponse;
 import com.example.moviesland.repository.PeopleRepository;
@@ -19,15 +20,16 @@ import io.reactivex.disposables.Disposable;
 public class PeopleViewModel extends ViewModel {
 
     private PeopleRepository peopleRepository;
+    private PopularPersonsResponse popularPersonsResponse;
 
     @Inject
-    public PeopleViewModel(PeopleRepository peopleRepository) {
+    PeopleViewModel(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
 
-    private MutableLiveData<List<Person>> personsLiveData = new MutableLiveData<>();
+    private MutableLiveData<PopularPersonsResponse> personsLiveData = new MutableLiveData<>();
 
-    public MutableLiveData<List<Person>> returnPersons() {
+    public MutableLiveData<PopularPersonsResponse> returnPersons() {
         return personsLiveData;
     }
 
@@ -39,6 +41,8 @@ public class PeopleViewModel extends ViewModel {
 
     public void getPopularPeople(int page) {
 
+        popularPersonsResponse = new PopularPersonsResponse();
+
         peopleRepository.getPopularPeopleRepo(page).subscribe(new Observer<GetPopularPeopleResponse>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -47,15 +51,14 @@ public class PeopleViewModel extends ViewModel {
 
             @Override
             public void onNext(GetPopularPeopleResponse response) {
-                if (response != null)
-                    mapPersonsData(response);
-                else
-                    personsLiveData.postValue(null);
+                mapPersonsData(response);
             }
 
             @Override
             public void onError(Throwable e) {
-                personsLiveData.postValue(null);
+                popularPersonsResponse.setCode(errorOccurred(e));
+                popularPersonsResponse.setPersonList(null);
+                personsLiveData.postValue(popularPersonsResponse);
             }
 
             @Override
@@ -66,9 +69,27 @@ public class PeopleViewModel extends ViewModel {
 
     }
 
+    private int errorOccurred(Throwable e) {
+
+        if (e.getMessage().equals("HTTP 401 "))
+            return 401;
+        else if (e.getMessage().equals("HTTP 404 "))
+            return 404;
+        else if (e.getMessage().equals("Unable to resolve host \"api.themoviedb.org\": " +
+                "No address associated with hostname"))
+            return 500;
+        else if (e.getMessage().equals("java.net.SocketTimeoutException"))
+            return 501;
+        else
+            return 0;
+
+    }
+
     private void mapPersonsData(GetPopularPeopleResponse response) {
 
+        popularPersonsResponse.setCode(200);
         List<Person> personsList = new ArrayList<>();
+
         for (GetPopularPeopleResponse.Result person : response.getResults()) {
 
             Person personItem = new Person();
@@ -83,7 +104,9 @@ public class PeopleViewModel extends ViewModel {
 
         }
 
-        personsLiveData.postValue(personsList);
+        popularPersonsResponse.setPersonList(personsList);
+
+        personsLiveData.postValue(popularPersonsResponse);
 
     }
 

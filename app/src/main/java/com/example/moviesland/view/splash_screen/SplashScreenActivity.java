@@ -39,7 +39,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void initListeners() {
 
-        peopleViewModel = new ViewModelProvider(this).get(PeopleViewModel.class);
+        peopleViewModel = new ViewModelProvider(this, viewModelFactory)
+                .get(PeopleViewModel.class);
 
         peopleViewModel.returnPersons().observe(SplashScreenActivity.this, people -> {
 

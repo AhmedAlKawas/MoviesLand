@@ -36,7 +36,7 @@ public class ImageViewActivity extends AppCompatActivity {
 
         imageViewBinding.btnDownload.setOnClickListener(view -> {
             if (imagePath != null) {
-                downloadImage.downloadImage(ImageViewActivity.this, imagePath);
+//                downloadImage.downloadImage(ImageViewActivity.this, imagePath);
                 IntentFilter intentFilter = new IntentFilter(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE);
                 registerReceiver(myBroadcastReciever, intentFilter);
@@ -69,7 +69,7 @@ public class ImageViewActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //            permission granted
-            downloadImage.downloadImage(ImageViewActivity.this, imagePath);
+//            downloadImage.downloadImage(ImageViewActivity.this, imagePath);
         }
     }
 

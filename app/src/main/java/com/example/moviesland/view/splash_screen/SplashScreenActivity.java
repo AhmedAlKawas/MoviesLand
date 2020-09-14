@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moviesland.R;
 import com.example.moviesland.model.Person;
-import com.example.moviesland.BaseApplication;
 import com.example.moviesland.view.home_page.HomePageActivity;
 import com.example.moviesland.view_model.PeopleViewModel;
 
@@ -17,22 +16,21 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjection;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-
     private PeopleViewModel peopleViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         setContentView(R.layout.activity_splash_screen);
 
-        ((BaseApplication) getApplication()).getApplicationComponent().inject(this);
-
         initListeners();
-
         peopleViewModel.getPopularPeople(1);
 
     }

@@ -3,9 +3,9 @@ package com.example.moviesland.di.module;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.moviesland.di.ViewModelKey;
 import com.example.moviesland.view_model.PeopleViewModel;
 import com.example.moviesland.view_model.ViewModelFactory;
-import com.example.moviesland.di.ViewModelKey;
 
 import dagger.Binds;
 import dagger.Module;

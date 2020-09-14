@@ -29,7 +29,6 @@ public abstract class NetworkModule {
 
     }
 
-
     @Provides
     @Singleton
     static PopularPeopleService providePopularPeopleService(Retrofit retrofit) {

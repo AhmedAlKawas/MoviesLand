@@ -1,17 +1,30 @@
 package com.example.moviesland.di.component;
 
-import com.example.moviesland.di.module.ContextModule;
+import com.example.moviesland.BaseApplication;
+import com.example.moviesland.di.ActivityBuilder;
 import com.example.moviesland.di.module.NetworkModule;
-import com.example.moviesland.view.splash_screen.SplashScreenActivity;
 
 import javax.inject.Singleton;
 
+import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {NetworkModule.class, ContextModule.class})
-public abstract interface ApplicationComponent {
+@Component(modules = {
+        NetworkModule.class,
+        ActivityBuilder.class,
+        AndroidSupportInjectionModule.class})
+public interface ApplicationComponent {
 
-    void inject(SplashScreenActivity splashScreenActivity);
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder application(BaseApplication application);
+
+        ApplicationComponent build();
+    }
+
+    void inject(BaseApplication application);
 
 }

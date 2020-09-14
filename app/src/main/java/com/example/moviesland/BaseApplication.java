@@ -1,22 +1,32 @@
 package com.example.moviesland;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.example.moviesland.di.component.ApplicationComponent;
 import com.example.moviesland.di.component.DaggerApplicationComponent;
 
-public class BaseApplication extends Application {
+import javax.inject.Inject;
 
-    private ApplicationComponent applicationComponent;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+
+public class BaseApplication extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationComponent = DaggerApplicationComponent.create();
+        ApplicationComponent applicationComponent = DaggerApplicationComponent.builder().application(this).build();
+        applicationComponent.inject(this);
     }
 
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 
 }

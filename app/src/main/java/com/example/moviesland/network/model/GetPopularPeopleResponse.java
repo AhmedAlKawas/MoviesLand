@@ -256,7 +256,7 @@ public class GetPopularPeopleResponse {
     }
 
 
-    public class Result {
+    public static class Result {
 
         @SerializedName("popularity")
         @Expose

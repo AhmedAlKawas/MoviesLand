@@ -51,7 +51,7 @@ public class PeopleViewModel extends ViewModel {
 
             @Override
             public void onNext(GetPopularPeopleResponse response) {
-                mapPersonsData(response);
+                personsLiveData.postValue(mapPersonsData(response));
             }
 
             @Override
@@ -75,8 +75,8 @@ public class PeopleViewModel extends ViewModel {
             return 401;
         else if (e.getMessage().equals("HTTP 404 "))
             return 404;
-        else if (e.getMessage().equals("Unable to resolve host \"api.themoviedb.org\": " +
-                "No address associated with hostname"))
+        else if (e.getMessage().equals("Unable to resolve host \"api.themoviedb.org\": No address" +
+                " associated with hostname"))
             return 500;
         else if (e.getMessage().equals("java.net.SocketTimeoutException"))
             return 501;
@@ -85,7 +85,7 @@ public class PeopleViewModel extends ViewModel {
 
     }
 
-    private void mapPersonsData(GetPopularPeopleResponse response) {
+    private PopularPersonsResponse mapPersonsData(GetPopularPeopleResponse response) {
 
         popularPersonsResponse.setCode(200);
         List<Person> personsList = new ArrayList<>();
@@ -106,7 +106,7 @@ public class PeopleViewModel extends ViewModel {
 
         popularPersonsResponse.setPersonList(personsList);
 
-        personsLiveData.postValue(popularPersonsResponse);
+        return popularPersonsResponse;
 
     }
 

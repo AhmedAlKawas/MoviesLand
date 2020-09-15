@@ -3,6 +3,7 @@ package com.example.moviesland;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import com.example.moviesland.model.PopularPersonsResponse;
+import com.example.moviesland.network.model.GetPersonImagesResponse;
 import com.example.moviesland.network.model.GetPopularPeopleResponse;
 import com.example.moviesland.repository.PeopleRepository;
 import com.example.moviesland.view_model.PeopleViewModel;
@@ -14,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -112,5 +115,34 @@ public class PeopleViewModelTest {
 
     }
 
+    @Test
+    public void observePersonImagesData() {
+
+        GetPersonImagesResponse getPersonImagesResponse = TestUtil.getPersonImagesResponse();
+        when(peopleRepository.getPersonImagesRepo(1)).thenReturn(Observable
+                .just(getPersonImagesResponse));
+
+        peopleViewModel.getPersonImages(1);
+
+        List<String> personImages = peopleViewModel.returnPersonImages().getValue();
+
+        Assert.assertNotNull(personImages);
+        Assert.assertEquals(2, personImages.size());
+
+    }
+
+    @Test
+    public void getPersonImagesDataFailure() {
+
+        when(peopleRepository.getPersonImagesRepo(1)).thenReturn(Observable
+                .error(new Throwable("HTTP 404 ")));
+
+        peopleViewModel.getPersonImages(1);
+
+        List<String> personImages = peopleViewModel.returnPersonImages().getValue();
+
+        Assert.assertNull(personImages);
+
+    }
 
 }

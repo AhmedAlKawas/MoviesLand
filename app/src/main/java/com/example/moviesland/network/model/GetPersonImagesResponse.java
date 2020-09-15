@@ -30,7 +30,7 @@ public class GetPersonImagesResponse {
         this.id = id;
     }
 
-    public class Profile {
+    public static class Profile {
 
         @SerializedName("iso_639_1")
         @Expose

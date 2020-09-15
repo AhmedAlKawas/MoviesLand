@@ -1,5 +1,6 @@
 package com.example.moviesland.repository;
 
+import com.example.moviesland.network.RxObservableSchedulers;
 import com.example.moviesland.network.model.GetPersonImagesResponse;
 import com.example.moviesland.network.model.GetPopularPeopleResponse;
 import com.example.moviesland.network.services.PopularPeopleService;
@@ -14,17 +15,19 @@ import io.reactivex.schedulers.Schedulers;
 public class PeopleRepository {
 
     private PopularPeopleService peopleService;
+    private RxObservableSchedulers observableSchedulers;
 
     @Inject
-    PeopleRepository(PopularPeopleService peopleService) {
+    public PeopleRepository(PopularPeopleService peopleService, RxObservableSchedulers observableSchedulers) {
         this.peopleService = peopleService;
+        this.observableSchedulers = observableSchedulers;
     }
 
     public Observable<GetPopularPeopleResponse> getPopularPeopleRepo(int page) {
 
         return Observable.create(emitter -> {
 
-            peopleService.getPopularPeople(page).observeOn(Schedulers.io()).subscribeOn(Schedulers.io())
+            peopleService.getPopularPeople(page).compose(observableSchedulers.applySchedulers())
                     .subscribe(new Observer<GetPopularPeopleResponse>() {
                         @Override
                         public void onSubscribe(Disposable d) {

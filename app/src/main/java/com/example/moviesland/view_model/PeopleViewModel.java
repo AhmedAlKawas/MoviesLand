@@ -23,7 +23,7 @@ public class PeopleViewModel extends ViewModel {
     private PopularPersonsResponse popularPersonsResponse;
 
     @Inject
-    PeopleViewModel(PeopleRepository peopleRepository) {
+    public PeopleViewModel(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
 
